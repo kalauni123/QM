@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1 | A4 Study Mode</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        :root {
+            --paper-bg: #ffffff;
+            --body-bg: #cbd5e1;
+            --primary: #2563eb;
+            --shadow: 0 10px 25px rgba(0,0,0,0.2);
+            --accent-red: #dc2626;
+        }
+
+        body {
+            background-color: var(--body-bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'serif', Times, 'Times New Roman';
+        }
+
+        .red-text { color: var(--accent-red); }
+
+        .a4-page {
+            background: var(--paper-bg);
+            width: 210mm;
+            height: 297mm;
+            padding: 20mm;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            box-sizing: border-box;
+            position: relative;
+            display: none; 
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .a4-page.active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        h1 { border-bottom: 2px solid #000; padding-bottom: 10px; color: #1e293b; font-size: 1.8rem; }
+        h3 { margin-bottom: 10px; }
+        p { font-size: 12pt; line-height: 1.6; text-align: justify; }
+
+        .equation-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .page-footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 20mm;
+            right: 20mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .nav-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+
+        @media (max-width: 210mm) {
+            body { zoom: 0.8; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="a4-page active" id="page1">
+        <a href="index.html" style="text-decoration: none; color: var(--primary);">← Back to Menu</a>
+        <h1 class="red-text">Chapter 1: <br> Introductory Wave Mechanics</h1>
+        
+        <h3>1.1 Inadequacy of Classical Mechanics</h3>
+        <h3 style="text-align: center; font-style: italic;">OR</h3>
+        <h3>What are the inadequacies of classical mechanics? What is the result of them?</h3>
+        
+        <p>
+            Classical mechanics describes the motion of macroscopic particles such as stars, planets, and moons, as well as microscopic particles like bacteria or viruses. It describes the motion of particles in the non-relativistic limit, i.e., \(v \ll c\) <br><br>
+            Newtonian mechanics is based on the concepts of: <br>
+            (a) Absolute space <br>
+            (b) Absolute time <br>
+            (c) Absolute mass <br><br>
+            Due to certain limitations of classical mechanics and its wrong assumptions, it could not explain the following physics phenomena: <br><br>
+            <span class="red-text">1. It could not explain the spectrum of Black body radiation.</span><br>
+            According to the classical theory of radiation, the energy density of Black body radiation is based on continuous emission, which failed to match experimental data at high frequencies. 
+        </p>
+
+<div class="equation-box">
+  <table width="100%">
+    <tr>
+      <td align="center">
+        $$U(\nu, T) = \frac{8\pi \nu^2 kT}{c^3}$$
+      </td>
+      <td align="right">
+        (1)
+      </td>
+    </tr>
+  </table>
+</div>
+
+        
+<p>This is the de Broglie relation. It implies that for any particle with momentum $p$, there is an associated wavelength $\lambda$. This was later experimentally verified by the Davisson-Germer experiment. This is the de Broglie relation. It implies that for any particle with momentum $p$, there is an associated wavelength $\lambda$. This was later experimentally verified by the Davisson-Germer experiment.</p>
+
+        <div class="page-footer">
+            <span>Page 1 of 6</span>
+            <button class="nav-btn" onclick="nextPage(2)">Next Page →</button>
+        </div>
+    </div>
+
+    <div class="a4-page" id="page2">
+        <h1>1.2 Historical Development of Quantum Theory</h1>
+        <p>The transition from classical to quantum theory was marked by the realization that energy is quantized. Max Planck’s study of blackbody radiation led to the formula:</p>
+
+        <div class="equation-box">
+            $$E = h\nu$$
+        </div>
+
+        <p>This section explores how these historical milestones shifted our understanding of the microscopic world, moving away from deterministic Newtonian paths to probabilistic wave functions.</p>
+
+        <div class="page-footer">
+            <button class="nav-btn" onclick="nextPage(1)">← Previous</button>
+            <span>Page 2 of 6</span>
+            <button class="nav-btn" onclick="nextPage(3)">Next Page →</button>
+        </div>
+    </div>
+
+    <div class="a4-page" id="page3">
+        <h1>1.3 Davisson-Germer Experiment</h1>
+        <p>The experimental confirmation of matter waves came when Davisson and Germer observed electron diffraction from a nickel crystal. This proved that electrons behave as waves under certain conditions.</p>
+        
+        
+
+        <p>The result matched the predicted de Broglie wavelength for electrons accelerated through a potential $V$:</p>
+        <div class="equation-box">
+            $$\lambda = \frac{h}{\sqrt{2meV}}$$
+        </div>
+
+        <div class="page-footer">
+            <button class="nav-btn" onclick="nextPage(2)">← Previous</button>
+            <span>Page 3 of 6</span>
+            <button class="nav-btn" onclick="nextPage(4)">Next Page →</button>
+        </div>
+    </div>
+
+    <div class="a4-page" id="page4">
+        <h1>1.4 de Broglie Waves</h1>
+        <p>A de Broglie wave represents the probability of finding a particle. Unlike a classical string wave, this is a wave of "probability amplitude."</p>
+
+        <div class="equation-box">
+            $$\Psi(x,t) = A e^{i(kx - \omega t)}$$
+        </div>
+
+        <p>Here, $k = 2\pi/\lambda$ is the wave vector and $\omega$ is the angular frequency. These waves are essential in describing particles at the atomic scale.</p>
+
+        <div class="page-footer">
+            <button class="nav-btn" onclick="nextPage(3)">← Previous</button>
+            <span>Page 4 of 6</span>
+            <button class="nav-btn" onclick="nextPage(5)">Next Page →</button>
+        </div>
+    </div>
+
+    <div class="a4-page" id="page5">
+        <h1>1.5 Group and Phase Velocity</h1>
+        <p>A single wave velocity (phase velocity $v_p$) cannot represent a particle. Instead, we use a "wave packet" which travels at the group velocity ($v_g$).</p>
+
+        <div class="equation-box">
+            $$v_p = \frac{\omega}{k}, \quad v_g = \frac{d\omega}{dk}$$
+        </div>
+
+        <p>For a non-relativistic particle, it can be shown that the group velocity $v_g$ is exactly equal to the classical particle velocity $v$.</p>
+        
+        [Image comparing phase velocity and group velocity of a wave packet]
+
+        <div class="page-footer">
+            <button class="nav-btn" onclick="nextPage(4)">← Previous</button>
+            <span>Page 5 of 6</span>
+            <button class="nav-btn" onclick="nextPage(6)">Next Page →</button>
+        </div>
+    </div>
+
+    <div class="a4-page" id="page6">
+        <h1>1.6 Uncertainty Principle</h1>
+        <p>Heisenberg's Uncertainty Principle states that one cannot measure the position ($x$) and momentum ($p$) of a particle with absolute precision simultaneously.</p>
+
+        <div class="equation-box">
+            $$\Delta x \cdot \Delta p \geq \frac{\hbar}{2}$$
+        </div>
+
+        <p>Applications include explaining why electrons do not fall into the nucleus and estimating the zero-point energy of a harmonic oscillator.</p>
+
+        <div class="page-footer">
+            <button class="nav-btn" onclick="nextPage(5)">← Previous</button>
+            <span>Page 6 of 6</span>
+            <button class="nav-btn" disabled>Finished</button>
+        </div>
+    </div>
+
+    <script>
+        function nextPage(pageNumber) {
+            const pages = document.querySelectorAll('.a4-page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById('page' + pageNumber).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>

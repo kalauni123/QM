@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1 | Auto-Flow A4 Mode</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        :root {
+            --paper-bg: #ffffff;
+            --body-bg: #cbd5e1;
+            --primary: #2563eb;
+            --accent-red: #dc2626;
+            --shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        body {
+            background-color: var(--body-bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'serif', Times, 'Times New Roman';
+            padding: 40px 0;
+        }
+
+        .red-text { color: var(--accent-red); }
+
+        /* The Window through which we see one page at a time */
+        .page-viewport {
+            width: 210mm;
+            height: 297mm;
+            background: var(--paper-bg);
+            box-shadow: var(--shadow);
+            overflow: hidden; /* Hides the other pages/columns */
+            position: relative;
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        /* The actual content that flows across columns */
+        .content-flow {
+            /* Each column is exactly one page width (minus padding) */
+            column-width: 170mm; 
+            column-gap: 40mm; /* This creates the 'gap' between our virtual pages */
+            height: 250mm;   /* Fixed height to trigger the overflow to next column */
+            transition: transform 0.5s ease-in-out;
+            text-align: justify;
+        }
+
+        h1 { border-bottom: 2px solid #000; padding-bottom: 10px; color: #1e293b; font-size: 1.8rem; }
+        p { font-size: 12pt; line-height: 1.6; margin-bottom: 15px; }
+
+        .equation-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            margin: 20px 0;
+            break-inside: avoid; /* Prevents equations from splitting between pages */
+        }
+
+        /* Fixed Navigation Controls at bottom */
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .nav-btn:disabled { background: #94a3b8; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" style="text-decoration: none; color: var(--primary); margin-bottom: 15px;">← Back to Menu</a>
+
+    <div class="page-viewport">
+        <div class="content-flow" id="flowContainer">
+            
+            <h1 class="red-text">Chapter 1: <br> Introductory Wave Mechanics</h1>
+            
+            <h3>1.1 Inadequacy of Classical Mechanics</h3>
+            <h3 style="text-align: center; font-style: italic;">OR</h3>
+            <h3>What are the inadequacies of classical mechanics? What is the result of them?</h3>
+            
+<p>
+            Classical mechanics describes the motion of macroscopic particles such as stars, planets, and moons, as well as microscopic particles like bacteria or viruses. It describes the motion of particles in the non-relativistic limit, i.e., \(v \ll c\) <br><br>
+            Newtonian mechanics is based on the concepts of: <br>
+            (a) Absolute space <br>
+            (b) Absolute time <br>
+            (c) Absolute mass <br><br>
+            Due to certain limitations of classical mechanics and its wrong assumptions, it could not explain the following physics phenomena: <br><br>
+
+            <p class="red-text">1. It could not explain the spectrum of Black body radiation.</p>
+          <p>According to the classical theory of radiation, the energy density of Black body radiation is:</p>
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem;">
+    <!-- Equation line -->
+    <div style="text-align:center; position:relative;">
+        $$U(\nu, T) = \frac{8\pi \nu^2 kT}{c^3}$$
+        <span style="position:absolute; right:0;">(1)</span>
+    </div>
+
+    <!-- Explanatory text -->
+    <div style="text-align:center; margin-top:5px;">
+        at a given frequency $\nu$ and temperature $T$
+    </div>
+</div>
+
+        
+<p>Therefore, the total energy density is $ \int_0^\infty U(\nu, T) \, d\nu $</p>
+
+<p>
+    Substituting the classical expression:  
+    $$\int_0^\infty U(\nu, T) \, d\nu = \frac{8 \pi k T}{c^3} \int_0^\infty \nu^2 \, d\nu$$
+</p>
+
+<p>
+    $$\implies \int_0^\infty U(\nu, T) \, d\nu = \frac{8 \pi k T}{c^3} \left[ \frac{\nu^3}{3} \right]_0^\infty$$
+</p>
+
+<p> 
+    $$\implies \infty \quad \text{(ultraviolet catastrophe)}$$
+</p>
+
+<p>
+    The total energy density at temperature $T$ comes out to infinity, but experimentally the total energy should be finite and measurable.
+</p>
+
+
+
+<p class="red-text">2. It couldnot explain the stability of atom.</p>
+<p>According to classical theory, an accelerated electron around the nucleus of an atom lossed its energy in the form of the radiation and its energy continuously decreases. Radius of electronic orbit also decreases and electrons jumps inside nucleus and atoms becomes unstable. But in real, atom is stable. </p>
+
+<p class="red-text">3. It couldnot explain discrete atomic spectrum.</p>
+<p>According to classical theory, energy exchange between an atom and the radiation field must be continuous. However, atoms absorb and emit discrete energy in units of $h\nu$.</p>
+
+
+<p class="red-text">4. It couldnot explain stark effect, zeeman effect.</p>
+
+<p class="red-text">5. It could not explain the tunneling effect.</p>
+
+<p>
+    The process of crossing high-energy barriers with low-energy particles is called the tunneling effect.<br>
+    This phenomenon can only be explained using quantum mechanics.<br><br>
+    Example: Ejection of low-energy $\alpha$-particles from the high binding energy of a Uranium nucleus.
+</p>
+
+<p class="red-text">6. It could not explain the Photoelectric effect.</p>
+<p>
+According to the classical theory of radiation, the K.E. of emitted electron (photoelectron) depends upon intensity of radiation, independent of frequency. <br> According to the experimental observation of Einstein photoelectric effect, the K.E. of photoelectron depends upon frequency of incident radiation, independent of intensity. <br>
+</p>
+<p>
+    $h\nu = \phi_0 + \frac{1}{2} m_e v^2$
+</p>
+
+<p>
+    where, $h\nu$ = energy of the incident photon<br>
+    $\phi_0$ = work function<br>
+    $m_e$ = mass of the electron<br>
+    $v$ = speed of the electron<br><br>
+    $\therefore K.E. \propto h\nu \quad \text{(for } \nu > \nu_0 \text{, where } \nu_0 = \frac{\phi_0}{h} \text{ is the threshold frequency)}$<br><br>
+    In classical mechanics, we cannot explain the threshold frequency.
+</p>
+
+
+<p class="red-text">7. It could not explain the phenomenon of pair production.</p>
+
+<p class="red-text">8. It could not explain the phenomenon of compton scattering.</p>
+<p>
+    According to classical theory, the frequency of scattered radiation should be equal to the frequency of incident radiation, i.e., there should be no change in frequency.<br>
+    $d\nu = 0$<br>
+    $d\lambda = 0$<br>
+    (which is the classical concept)
+</p>
+
+<p>
+    According to the Compton effect, the observed shift in wavelength of scattered radiation is given by:
+</p>
+
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem; border:1px solid #ccc; border-radius:8px; background-color:#f9f9f9;">
+    <!-- Equation line -->
+    <div style="text-align:center; position:relative;">
+        $$d\lambda = \lambda' - \lambda = \frac{h}{m_0 c} (1 - \cos\theta)$$
+        <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">(1)</span>
+    </div>
+</div>
+
+<p>
+    where, $\lambda'$ = wavelength of scattered radiation<br>
+    $\lambda$ = wavelength of incident radiation<br>
+    $m_0$ = rest mass of the electron<br>
+    $v$ = speed of the electron<br>
+    $\theta$ = scattering angle
+</p>
+
+
+
+<p class="red-text">9. It could not explain the phenomenon of superconductivity.</p>
+
+
+<p class="red-text">10. Classical mechanics could not explain the existance of phonon (smallest part of sound wave).</p>
+
+<p class="red-text">11. It could not explain the phenomenon of radioactivity ($\beta$-decay, $\alpha$-decay).</p>
+
+
+
+
+<h3>1.2 Historical Development of Quantum Theory</h3>
+<p class="red-text">1. The Energy Packet Idea (Max Planck, 1900)</p>
+<p>• The Problem (Classical Failure): Classical physics used the Rayleigh-Jeans Law, which predicted that an object would radiate infinite energy at short wavelengths (high frequencies). This was the "Ultraviolet Catastrophe."</p>
+
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem; border:1px solid #ccc; border-radius:8px; background-color:#f9f9f9;">
+    <div style="text-align:center; position:relative;">
+        $$E = nh\nu$$
+        <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">(1)</span>
+    </div>
+    <div style="text-align:center; margin-top:5px;">
+        $E$: Energy, $n$: Integer ($1, 2, 3...$), $h$: Planck’s constant ($6.626 \times 10^{-34}$ J·s), $\nu$: Frequency
+    </div>
+</div>
+
+<p>• The Limitation: Planck originally viewed this as a mathematical "trick" to make the curve fit the data. He did not yet believe that light itself was physically made of particles.</p>
+
+<p class="red-text">2. The Photoelectric Effect (Albert Einstein, 1905)</p>
+<p>Einstein used Planck's "packet" idea to explain the Photoelectric Effect. He proved that light acts like a stream of particles called photons. When a photon hits a metal surface, it gives its energy to an electron to knock it loose.</p>
+
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem; border:1px solid #ccc; border-radius:8px; background-color:#f9f9f9;">
+    <div style="text-align:center; position:relative;">
+        $$K_{max} = h\nu - \Phi$$
+        <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">(2)</span>
+    </div>
+    <div style="text-align:center; margin-top:5px;">
+        $K_{max}$: Kinetic energy of the ejected electron, $\Phi$: Work function (energy needed to "free" the electron)
+    </div>
+</div>
+
+<p>• The Limitation: While it explained light-matter interaction, it didn't explain the internal structure of the atom or why atoms don't collapse.</p>
+
+<p class="red-text">3. The Quantized Atom (Niels Bohr, 1913)</p>
+<p>• How it Solved the Limitation: Bohr applied quantization to the electron's motion. He argued that electrons can only exist in specific "stationary" orbits where they do not radiate energy.</p>
+<p>• The Solution: This explained the Hydrogen Emission Spectrum—the specific colors of light emitted when an electron "jumps" between orbits.</p>
+
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem; border:1px solid #ccc; border-radius:8px; background-color:#f9f9f9;">
+    <div style="text-align:center; position:relative;">
+        $$L = n\hbar \quad \text{and} \quad \Delta E = E_2 - E_1 = h\nu$$
+        <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">(3)</span>
+    </div>
+    <div style="text-align:center; margin-top:5px;">
+        $L$: Angular momentum, $\hbar$: $h/2\pi$, $\Delta E$: Energy difference between orbits
+    </div>
+</div>
+
+<p>• The Limitation: The Bohr model was a "semi-classical" hybrid. It worked perfectly for Hydrogen (1 electron) but failed for larger atoms like Helium and could not explain the relative intensity of spectral lines.</p>
+
+<p class="red-text">4. Matter Waves (Louis de Broglie, 1924)</p>
+<p>• De Broglie suggested that if light can act like a particle, then particles (like electrons) can act like waves. This is known as Wave-Particle Duality.</p>
+
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem; border:1px solid #ccc; border-radius:8px; background-color:#f9f9f9;">
+    <div style="text-align:center; position:relative;">
+        $$\lambda = \frac{h}{p} = \frac{h}{mv}$$
+        <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">(4)</span>
+    </div>
+    <div style="text-align:center; margin-top:5px;">
+        $\lambda$: De Broglie wavelength, $p$: Momentum
+    </div>
+</div>
+
+<p>• The Limitation: This was a conceptual breakthrough but lacked a general wave equation to describe how these waves behave in different force fields (like inside a complex atom).</p>
+
+<p class="red-text">5. Wave Mechanics & Uncertainty (Heisenberg & Schrödinger, 1925–1927)</p>
+<p>• How it Solved the Limitation: Schrödinger developed a partial differential equation (the Wave Equation) to describe the behavior of $\psi$ (the wave function). Heisenberg showed that because particles are waves, we cannot know their position and momentum perfectly at the same time.</p>
+<p>• The Solution: This "Modern Quantum Mechanics" replaced Bohr's fixed orbits with probability clouds (orbitals). It works for all elements on the periodic table.</p>
+
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem; border:1px solid #ccc; border-radius:8px; background-color:#f9f9f9;">
+    <div style="text-align:center; position:relative;">
+        $$\hat{H}\psi = E\psi \quad \text{and} \quad \Delta x \cdot \Delta p \ge \frac{\hbar}{2}$$
+        <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">(5)</span>
+    </div>
+    <div style="text-align:center; margin-top:5px;">
+        $\hat{H}$: Hamiltonian operator, $\psi$: Wave function, $\Delta x$: Position uncertainty
+    </div>
+</div>
+
+<p>• The Limitation: These equations were non-relativistic. They did not work for particles moving near the speed of light and did not account for the spin of the electron or antimatter.</p>
+
+<p class="red-text">6. Quantum Field Theory (QFT) (1930s–Present)</p>
+<p>• How it Solved the Limitation: Dirac, Feynman, and others merged Quantum Mechanics with Special Relativity.</p>
+<p>• The Solution: This led to the discovery of Antimatter and the creation of the Standard Model, which describes how all forces (except gravity) work through the exchange of particles in "fields."</p>
+<p>• Current Limitation: Quantum Theory currently fails to include Gravity (General Relativity). We still do not have a "Theory of Everything" that explains the center of a Black Hole or the very beginning of the Big Bang.</p>
+
+
+
+
+
+
+<!-- Davission Germer Experiment: result and its interpretation Start Here -->
+
+<h3>1.3 Davission Germer Experiment: result and its interpretation</h3>
+<h3 class="red-text">Davisson–Germer Experiment (Existence of Matter Wave for Electron)</h3>
+<p>
+Before 1927, waves (like light) and particles (like electrons) were thought to be completely different. 
+De Broglie suggested that every moving particle has a wavelength ($\lambda$) related to its momentum ($p$):
+</p>
+
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem;">
+    <div style="text-align:center; position:relative;">
+        $$\lambda = \frac{h}{p}$$
+    </div>
+</div>
+
+<p>
+The Davisson–Germer experiment was designed to see if electrons could produce an interference pattern, something only waves can do.
+</p>
+
+
+<!-- Image -->
+<div style="text-align:center; margin-top:20px;">
+    <img src="image1-ch1.png" alt="Davisson–Germer Experiment Diagram" style="max-width:100%; height:auto;">
+</div>
+
+<p>
+The first experimental evidence that a beam of particles shows wave-like properties was given by American physicists Davisson and Germer.
+<br><br>
+Davisson and Germer measured the de-Broglie wavelength for slow electrons accelerated by a potential difference ranging from 30 V to 100 V by the diffraction method.
+<br><br>
+The beam of electrons is produced from an electron gun. The gun consists of a filament F heated to red, so that electrons are emitted by the process of thermionic emission. The electrons are accelerated by a potential difference and hence gain certain velocity.
+<br><br>
+The collimated (narrow/fine) beam of electrons falls on the single crystal of nickel called the target. Then these electrons undergo reflection and are incident on collector C, which is connected to a galvanometer. The collector is capable of moving on a graduated circular scale as shown in the figure.
+<br><br>
+<b>Working:</b> Initially the accelerating potential (V) is given a low value and the collector is placed at a certain position. Now, as the value of accelerating potential increases, the collector is moved to various positions on the scale and the corresponding galvanometer current is noted.
+<br><br>
+The observations are repeated for different accelerating potentials and corresponding curves are drawn. The important curves are shown in the figure below:
+</p>
+<!-- Figure 2 -->
+<div style="text-align:center; margin-top:20px;">
+    <img src="image2-ch1.png" alt="Davisson–Germer experiment curves" style="max-width:100%; height:auto;">
+    <p><b>Figure 2:</b> Diffraction curves obtained in the Davisson–Germer experiment.</p>
+</div>
+<p>
+It is seen that a hump begins to appear in the curves for 44 volt electrons. With increasing potential, the hump moves upward and becomes most prominent in the curve for 54 volt electrons at $\phi = 50^\circ$.
+<br><br>
+At higher potentials the hump gradually disappears. The humps in their prominent state indicate the existence of electron waves.
+</p>
+
+
+
+
+<h3>Calculation from de-Broglie Hypothesis </h3>
+
+<p>From de-Broglie hypothesis</p>
+
+<p>The kinetic energy ($E_k$) is related to momentum ($p$) by:</p>
+
+<div class="equation-box" style="text-align:center;">
+$$E_k = \frac{p^2}{2m} \Rightarrow p = \sqrt{2mE_k}$$
+</div>
+
+<p>For an electron with charge ($e$) accelerated by voltage ($V$):</p>
+
+<div class="equation-box" style="text-align:center;">
+$$E_k = eV$$
+</div>
+
+<p>The de-Broglie equation:</p>
+
+<div class="equation-box" style="text-align:center;">
+$$\lambda = \frac{h}{p} = \frac{h}{\sqrt{2meV}}$$
+</div>
+
+<p>Putting in the values: In the actual experiment, the most prominent peak occurred at ($V = 54\,V$).</p>
+
+<ul>
+<li>$h \approx 6.626\times10^{-34}\,J\cdot s$</li>
+<li>$m \approx 9.1\times10^{-31}\,kg$</li>
+<li>$e \approx 1.6\times10^{-19}\,C$</li>
+</ul>
+
+<div class="equation-box" style="text-align:center;">
+$$
+\lambda =
+\frac{6.626\times10^{-34}}
+{\sqrt{2\times9.1\times10^{-31}\times1.6\times10^{-19}\times54}}
+$$
+</div>
+
+<div class="equation-box" style="text-align:center;">
+$$\lambda \approx 1.67\times10^{-10}\,m = 1.67\,\text{Å}$$
+</div>
+
+
+
+<h3>Calculation from Bragg’s Law (Experimental)</h3>
+
+<p>The electrons were scattered by a Nickel crystal. To use Bragg's law, we need to distinguish between the scattering angle ($\phi$) and the glancing angle ($\theta$).</p>
+
+<ul>
+<li><b>Scattering Angle ($\phi$):</b> The experiment found a peak at $\phi = 50^\circ$.</li>
+</ul>
+
+<p><b>Glancing Angle ($\theta$):</b> This is the angle with the atomic planes. They are related by:</p>
+
+<div class="equation-box" style="text-align:center;">
+$$\theta = 90^\circ - \frac{\phi}{2}$$
+</div>
+
+<div class="equation-box" style="text-align:center;">
+$$\theta = 90^\circ - 25^\circ = 65^\circ$$
+</div>
+
+<ul>
+<li><b>Interplanar Spacing ($d$):</b> For Nickel, $d = 0.91\,\text{Å}$.</li>
+</ul>
+
+<p>Applying Bragg’s law ($n = 1$):</p>
+
+<div class="equation-box" style="text-align:center;">
+$$\lambda = 2d\sin\theta$$
+</div>
+
+<div class="equation-box" style="text-align:center;">
+$$\lambda = 2\times0.91\,\text{Å}\times\sin(65^\circ)$$
+</div>
+
+<div class="equation-box" style="text-align:center;">
+$$\lambda = 1.82 \times 0.9063$$
+</div>
+
+<div class="equation-box" style="text-align:center;">
+$$\lambda \approx 1.65\,\text{Å}$$
+</div>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>Comparing the two results:</p>
+
+<ul>
+<li><b>Theoretical (de-Broglie):</b> $1.67\,\text{Å}$</li>
+<li><b>Experimental (Bragg):</b> $1.65\,\text{Å}$</li>
+</ul>
+
+<p>
+The values are in excellent agreement. This proves that electrons, which are particles, undergo diffraction,
+a property exclusively belonging to waves.
+</p>
+
+
+<h3 class="red-text">Limitations of the Davisson–Germer Experiment</h3>
+
+<p>
+<b>1. Particle Size Limit:</b> The experiment is specifically tailored for subatomic particles (electrons, protons, neutrons). Larger particles possess momenta that result in de Broglie wavelengths ($\lambda$) far too small to be resolved by the atomic spacing of crystals.
+</p>
+
+<p>
+<b>2. Target Noise:</b> The high-energy incident beam can trigger the emission of secondary electrons from the target atoms. This creates background "noise" that can obscure the primary diffraction signal.
+</p>
+
+<p>
+<b>3. Limited Penetration:</b> Because low-energy electrons are used, they only interact with the topmost atomic layers. Consequently, this method probes surface physics rather than the bulk internal structure of the material.
+</p>
+
+<p>
+<b>4. Narrow Energy Window:</b> Destructive and constructive interference (Bragg peaks) are only clearly observable within a specific voltage range—typically between <b>44 V and 68 V</b>—with the most prominent peak occurring at <b>54 V</b>.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>1.4 de-Broglie waves</h3>
+<h3>Wave–Matter Duality of Radiation</h3>
+
+<p>
+In certain experimental observations, radiation behaves as a wave. 
+<br>For example, experiments associated with:
+<br>(i) Interference
+<br>(ii) Diffraction
+<br>(iii) Polarization, etc.
+</p>
+
+<p>
+In some experimental observations, radiation behaves as a stream of particles.
+<br>For example:
+<br>(i) Compton effect
+<br>(ii) Photoelectric effect
+<br>(iii) Discrete emission and absorption of radiation by a black body, etc.
+</p>
+<p>
+The same radiation behaves as both a wave and a particle. This nature of radiation is known as <b>wave–matter duality of radiation</b>.
+</p>
+<p>
+According to Planck's theory:
+</p>
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem;">
+    <div style="text-align:center;">
+        $$E = h\nu$$
+        <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">(1)</span>
+    </div>
+    <div style="text-align:center; margin-top:5px;">
+        Where $h$ = Planck's constant
+    </div>
+</div>
+<p>
+According to Einstein's mass-energy relation:
+</p>
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem;">
+    <div style="text-align:center;">
+        $$E = mc^2$$
+        <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">(2)</span>
+    </div>
+</div>
+<p>
+From equations (1) and (2):
+</p>
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem;">
+    <div style="text-align:center;">
+        $$h\nu = mc^2$$
+        <br>
+        $$h \frac{c}{\lambda} = mc^2$$
+        <br>
+        $$\lambda = \frac{h}{mc}$$
+    </div>
+    <div style="text-align:center; margin-top:5px;">
+        where $\lambda$ = wavelength of photon
+    </div>
+</div>
+<p>
+Also, using momentum $p = mc$:
+</p>
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem;">
+    <div style="text-align:center;">
+        $$\lambda = \frac{h}{p}$$
+        <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">(3)</span>
+    </div>
+    <div style="text-align:center; margin-top:5px;">
+        Equation (3) connects the wave and particle nature of radiation.
+    </div>
+</div>
+
+
+<h3>Wave-Particle Duality: The Quantum Paradox</h3>
+<p>
+In classical physics, particles and waves are mutually exclusive; a particle is a localized object, while a wave is a disturbance spread through space. However, quantum entities like electrons and photons defy this distinction (break this rule) by acting as both, depending on how we choose to measure them.
+</p>
+
+<p>
+<b>Dual Behaviors:</b> Particle-like behavior is characterized by energy being exchanged in discrete "packets" known as quanta. Conversely, wave-like behavior is evidenced by particles demonstrating interference and diffraction patterns, phenomena traditionally reserved for fluid or sound waves.
+</p>
+
+<p>
+<b>Light: Both Ripple and Bullet</b><br>
+Light was the first entity to break the classical mold. Thomas Young’s Double-Slit Experiment (1801) provided wave evidence by showing light creates interference patterns. Later, Albert Einstein’s explanation of the Photoelectric Effect (1905) proved light also behaves as a stream of particles called photons, where energy is defined by:
+</p>
+
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem; border:1px solid #ccc; border-radius:8px; background-color:#f9f9f9;">
+    <div style="text-align:center;">
+        $$E = h\nu$$
+    </div>
+</div>
+
+<div style="text-align:center; margin-top:20px;">
+    <img src="image3-ch1.png" 
+         alt="Diagram of the Photoelectric Effect" 
+         style="width:50%; height:auto; border:1px solid #ccc; border-radius:5px;">
+    <p><b>Figure:</b> The Photoelectric Effect showing incident light ejecting electrons from a metal surface.</p>
+</div>
+
+
+
+<p>
+<b>Matter as a Wave: The de Broglie Hypothesis</b><br>
+In 1924, Louis de Broglie proposed a radical symmetry: if light could behave like a particle, then matter must be able to behave like a wave. He introduced the de Broglie wavelength ($\lambda$), which bridges the gap between a particle's physical properties (mass $m$ and velocity $v$) and its wave-like nature:
+</p>
+
+<div class="equation-box" style="width:100%; position:relative; padding:15px; font-size:1rem; border:1px solid #ccc; border-radius:8px; background-color:#f9f9f9;">
+    <div style="text-align:center;">
+        $$\lambda = \frac{h}{p} = \frac{h}{mv}$$
+    </div>
+</div>
+
+<p>
+<b>Experimental Confirmation</b><br>
+The Davisson–Germer experiment (1927) provided the "smoking gun" for matter waves. By firing electrons at a nickel crystal, researchers observed a diffraction pattern. Since diffraction is a wave-specific phenomenon, this confirmed that even solid matter possesses an underlying wave nature.
+</p>
+
+
+
+
+
+  
+<h3>1.5 Group and Phase velocity: relations and applications</h3>
+
+<h3>  Wave Packet </h3>
+
+<p> In quantum mechanics, a wave packet is a localized disturbance that results from the superposition of many individual waves of different wavelengths.
+<br> While a single, pure sine wave (a plane wave) extends infinitely through space, a wave packet is confined to a specific region, making it the mathematical tool used to represent "particles" like electrons.
+
+<h4> The Superposition Principle</h4>
+<div style="margin: 20px 0; padding: 15px; border-left: 5px solid #2196F3; background-color: #f9f9f9; font-family: sans-serif;">
+    <h3 style="margin-top: 0; color: #1565C0;">The Wave Packet</h3>
+    
+    <p>A wave packet is constructed by adding together multiple harmonic waves, $e^{i(kx-\omega t)}$, using a <b>Fourier transform</b>. While a single frequency wave is spread out infinitely, combining waves with a range of different wavenumbers ($k$) allows them to interfere constructively in one specific region and destructively elsewhere.</p>
+
+    <div style="text-align: center; background: #fff; padding: 10px; margin: 15px 0; border: 1px solid #ddd; border-radius: 4px;">
+        <p style="font-size: 1.1em;">
+            $$\psi(x,t) = \int_{-\infty}^{\infty} A(k) e^{i(kx - \omega t)} dk$$
+        </p>
+        <p style="font-size: 0.9em; color: #666;"><i>Equation: Superposition of waves creating a localized packet.</i></p>
+    </div>
+
+    <p>This localization is the mathematical foundation for the <b>Heisenberg Uncertainty Principle</b>: the more you narrow the range of position ($x$), the wider the range of wavenumbers ($k$) you must include.</p>
+</div>
+</p>
+
+
+
+<div style="margin: 20px 0; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6;">
+        Mathematically, a 1D wave packet $\Psi(x,t)$ is often represented as a superposition of plane waves:
+    </p>
+
+    <div style="text-align: center; margin: 25px 0; font-size: 1.25em; color: #333;">
+        $$\Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} A(k) e^{i(kx - \omega(k)t)} dk$$
+    </div>
+
+    <p style="font-family: 'Segoe UI', sans-serif; font-size: 0.95em; color: #555;">
+        Where $A(k)$ is the <b>amplitude function</b> (or spectral weighting) that determines the "shape" of the packet in momentum space.
+    </p>
+</div>
+
+<h4> Group vs. Phase Velocity </h4>
+<div style="margin: 20px 0; padding: 15px; border-left: 4px solid #F44336; background-color: #fff8f8; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6;">
+    <h3 style="margin-top: 0; color: #D32F2F;">Phase Velocity vs. Group Velocity</h3>
+    <p>When a wave packet moves, we must distinguish between two different speeds that describe its motion:</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 15px;">
+        <div style="flex: 1; min-width: 250px; padding: 15px; border: 1px solid #ddd; border-radius: 6px; background: white;">
+            <b style="color: #D32F2F;">Phase Velocity ($v_p$)</b>
+            <p style="font-size: 0.9em; margin: 8px 0;">The speed of the individual <b>ripples</b> (oscillations) inside the packet.</p>
+            <div style="text-align: center; font-size: 1.2em; margin-top: 10px;">
+                $$v_p = \frac{\omega}{k}$$
+            </div>
+        </div>
+
+        <div style="flex: 1; min-width: 250px; padding: 15px; border: 1px solid #ddd; border-radius: 6px; background: white;">
+            <b style="color: #D32F2F;">Group Velocity ($v_g$)</b>
+            <p style="font-size: 0.9em; margin: 8px 0;">The speed at which the overall <b>"envelope"</b> or localized peak moves. In quantum mechanics, this represents the particle's actual velocity.</p>
+            <div style="text-align: center; font-size: 1.2em; margin-top: 10px;">
+                $$v_g = \frac{d\omega}{dk}$$
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<h4> Dispersion: The Spreading Packet </h4>
+<div style="margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #fcfcfc; font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6;">
+    <h3 style="margin-top: 0; color: #2c3e50; border-bottom: 2px solid #3498db; display: inline-block;">Dispersion and Evolution</h3>
+    
+    <p>In a vacuum, light waves of all frequencies travel at the same constant speed ($c$). However, for <b>matter waves</b> (such as an electron), the frequency $\omega$ depends on the wavenumber $k$ in a non-linear way:</p>
+
+    <div style="text-align: center; margin: 20px 0; font-size: 1.3em; background: #fff; padding: 15px; border-radius: 5px; box-shadow: inset 0 0 5px rgba(0,0,0,0.05);">
+        $$\omega = \frac{\hbar k^2}{2m}$$
+    </div>
+
+    
+
+    <p>Because these constituent waves travel at different speeds, the wave packet inevitably <b>spreads out over time</b>. A "sharp" electron—highly localized at $t=0$—will evolve into a broad, fuzzy cloud as time progresses. This phenomenon is a direct consequence of the wave nature of matter and the <b>Schrödinger equation</b>.</p>
+</div>
+
+
+<h4> Connection to Uncertainty </h4>
+<div style="margin: 20px 0; padding: 20px; border-left: 6px solid #9c27b0; background-color: #fdf2ff; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6;">
+    <h3 style="margin-top: 0; color: #7b1fa2;">The Uncertainty Principle Connection</h3>
+    <p>The wave packet is the physical manifestation of the <b>Heisenberg Uncertainty Principle</b>. This fundamental limit arises from the Fourier relationship between space ($x$) and momentum ($p$):</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 20px 0;">
+        <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; border: 1px dashed #9c27b0;">
+            <p>If the packet is very <b>narrow in space</b> ($\Delta x$ is small), you must sum a very <b>wide range of wavenumbers</b> to construct it ($\Delta k$ is large).</p>
+        </div>
+        <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; border: 1px dashed #9c27b0;">
+            <p>Since momentum $p = \hbar k$, a tightly localized spatial packet automatically implies a high uncertainty in momentum ($\Delta p$).</p>
+        </div>
+    </div>
+
+    
+
+    <p style="text-align: center; font-size: 1.4em; margin-top: 20px; color: #4a148c;">
+        $$\Delta x \Delta p \geq \frac{\hbar}{2}$$
+    </p>
+    <p style="font-size: 0.85em; color: #666; text-align: center;"><i>This inequality represents the inescapable trade-off in quantum measurements.</i></p>
+</div>
+
+
+
+
+
+
+
+
+<h3>1.6 Uncertainity principle and its applications</h3>
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="nav-btn" onclick="changePage(-1)">← Previous</button>
+        <span id="pageNum">Page 1</span>
+        <button class="nav-btn" onclick="changePage(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const container = document.getElementById('flowContainer');
+        const pageNumDisplay = document.getElementById('pageNum');
+
+        function changePage(direction) {
+            currentPage += direction;
+            if (currentPage < 0) currentPage = 0;
+
+            // We move by 210mm (page width) + 0mm (gap is internal) 
+            // but since padding is involved, 210mm is the exact shift
+            let shift = currentPage * 210; 
+            container.style.transform = `translateX(-${shift}mm)`;
+            
+            pageNumDisplay.innerText = `Page ${currentPage + 1}`;
+        }
+    </script>
+
+</body>
+</html>
