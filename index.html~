@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quantum Mechanics | Full-Screen Reader</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent-red: #dc2626;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --nav-bg: #ffffff;
+        }
+
+        /* Full Screen Setup */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Prevents whole body from scrolling */
+            background-color: var(--bg-color);
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Header */
+        header {
+            padding: 10px 20px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Main Content Area - Occupies all available space */
+        main {
+            flex: 1; /* Takes 100% remaining height */
+            overflow-y: auto; /* Scrollable text area */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 850px; /* Professional reading width */
+            background: white;
+            padding: 40px;
+            min-height: 100%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Typography */
+        h1 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; font-size: 1.8rem; }
+        .red-text { color: var(--accent-red); font-weight: bold; }
+        p { font-size: 12.5pt; line-height: 1.7; text-align: justify; margin-bottom: 20px; }
+
+        .equation-box {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        /* Navigation Bar - Fixed at Bottom */
+        nav {
+            height: 70px;
+            background: var(--nav-bg);
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 0 15px;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .page-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Mobile Specific Fixes */
+        @media (max-width: 600px) {
+            .page-container { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            nav { gap: 10px; }
+            .nav-btn { padding: 10px 15px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" style="text-decoration:none; color:var(--primary); font-weight:bold;">← MENU</a>
+        <span style="font-weight:bold; color:#64748b;">QUANTUM PHYSICS</span>
+    </header>
+
+    <main id="scrollArea">
+        <div class="page-container">
+            <div class="content-section active" id="p1">
+                <h1 class="red-text">Chapter 1: Introductory Wave Mechanics</h1>
+                <h3>1.1 Inadequacy of Classical Mechanics</h3>
+                <p>Classical mechanics describes the motion of macroscopic particles such as stars, planets, and moons, as well as microscopic particles like bacteria or viruses. It describes the motion of particles in the non-relativistic limit, i.e., $v \ll c$ </p>
+                <p>Newtonian mechanics is based on the concepts of: <br>(a) Absolute space (b) Absolute time (c) Absolute mass </p>
+                
+                <p class="red-text">1. Spectrum of Black body radiation.</p>
+                <p>According to the classical theory of radiation, the energy density of Black body radiation is:</p>
+                <div class="equation-box">
+                    $$U(\nu, T) = \frac{8\pi \nu^2 kT}{c^3} \quad (1)$$
+                </div>
+                <p>Therefore, the total energy density is $ \int_0^\infty U(\nu, T) \, d\nu $. Substituting the classical expression results in <b>infinity</b> (Ultraviolet Catastrophe).</p>
+            </div>
+
+            <div class="content-section" id="p2">
+                <p class="red-text">2. Stability of atom.</p>
+                <p>According to classical theory, an accelerated electron around the nucleus of an atom loses its energy in the form of radiation and its energy continuously decreases. Radius of electronic orbit also decreases and electrons jump inside nucleus and atoms become unstable. But in real, atom is stable. </p>
+                
+                <p class="red-text">6. Photoelectric effect.</p>
+                <p>According to the experimental observation of Einstein photoelectric effect, the K.E. of photoelectron depends upon frequency of incident radiation, independent of intensity.</p>
+                <div class="equation-box">
+                    $$h\nu = \phi_0 + \frac{1}{2} m_e v^2$$
+                </div>
+            </div>
+
+            <div class="content-section" id="p3">
+                <h3>1.3 Davission Germer Experiment</h3>
+                
+                <p>The Davisson–Germer experiment was designed to see if electrons could produce an interference pattern. The observation of a peak at 54V and 50 degrees proved the wave nature.</p>
+                <div class="equation-box">
+                    $$\lambda = \frac{h}{\sqrt{2meV}} \approx 1.67\,\text{Å}$$
+                </div>
+                <p>This matches the Bragg's Law calculation of $1.65\,\text{Å}$, providing the first experimental evidence for matter waves.</p>
+            </div>
+        </div>
+    </main>
+
+    <nav>
+        <button class="nav-btn" id="prevBtn" onclick="changePage(-1)">Previous</button>
+        <div class="page-controls">
+            <span>Page</span>
+            <input type="number" id="pageInput" value="1" min="1" onchange="jumpToPage()">
+            <span>of <span id="totalPage">3</span></span>
+        </div>
+        <button class="nav-btn" id="nextBtn" onclick="changePage(1)">Next</button>
+    </nav>
+
+    <script>
+        let currentPage = 1;
+        const sections = document.querySelectorAll('.content-section');
+        const totalPages = sections.length;
+        document.getElementById('totalPage').innerText = totalPages;
+
+        function updateUI() {
+            sections.forEach(s => s.classList.remove('active'));
+            document.getElementById('p' + currentPage).classList.add('active');
+            
+            document.getElementById('pageInput').value = currentPage;
+            document.getElementById('prevBtn').disabled = (currentPage === 1);
+            document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+            
+            // Reset scroll position to top of page
+            document.getElementById('scrollArea').scrollTop = 0;
+        }
+
+        function changePage(step) {
+            currentPage += step;
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            updateUI();
+        }
+
+        function jumpToPage() {
+            const val = parseInt(document.getElementById('pageInput').value);
+            if (val >= 1 && val <= totalPages) {
+                currentPage = val;
+                updateUI();
+            } else {
+                document.getElementById('pageInput').value = currentPage;
+            }
+        }
+    </script>
+</body>
+</html>
